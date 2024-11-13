@@ -10,6 +10,9 @@ const ContextProvider = (props) => {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
+
+  const delayPara = (index, nextWord) => {};
+
   const onSent = async (prompt) => {
     setResultData("");
     setLoading(true);

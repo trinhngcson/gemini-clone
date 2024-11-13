@@ -82,11 +82,19 @@ const Main = () => {
             </div>
             <div className="flex items-center gap-5">
               <img
-                className="w-10 rounded-full"
+                className={`w-10 rounded-full ${loading ? `animate-spin` : ""}`}
                 src={assets.gemini_icon}
                 alt=""
               />
-              <p>{resultData}</p>
+              {loading ? (
+                <div className="flex w-screen flex-col gap-2">
+                  <hr className="h-5 border-none rounded-md bg-gray-100 bg-cover bg-gradient-to-r from-blue-300 via-white to-blue-300 animate-loader" />
+                  <hr className="h-5  border-none rounded-md bg-gray-100 bg-cover bg-gradient-to-r from-blue-300 via-white to-blue-300 animate-loader" />
+                  <hr className="h-5 w-[60%] border-none rounded-md bg-gray-100 bg-cover bg-gradient-to-r from-blue-300 via-white to-blue-300 animate-loader" />
+                </div>
+              ) : (
+                <p className="text-lg font-light">{resultData}</p>
+              )}
             </div>
           </div>
         )}
