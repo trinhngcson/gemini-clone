@@ -3,7 +3,7 @@ import { assets } from "../../assets/assets";
 const Sidebar = () => {
   const [extended, setExtended] = useState(false);
   return (
-    <div className="hidden md:inline-flex h-screen flex-col justify-between bg-blue-100 py-6 px-5">
+    <div className="hidden md:inline-flex h-screen flex-col justify-between bg-gray-100 py-6 px-5">
       <div className="">
         <img
           onClick={() => setExtended(!extended)}
