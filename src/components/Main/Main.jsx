@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { assets } from "../../assets/assets";
+import { assets, data } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
 const Main = () => {
@@ -12,7 +12,6 @@ const Main = () => {
     loading,
     resultData,
   } = useContext(Context);
-  console.log("🚀 ~ Main ~ resultData:", resultData);
 
   return (
     <div className="flex-1 relative min-h-screen pb-[15vh]">
@@ -32,42 +31,19 @@ const Main = () => {
               <p>How can I help you today?</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-5">
-              <div className="relative card h-48 p-4 rounded-lg cursor-pointe bg-gray-300 hover:bg-gray-400 hover:scale-105 transition-all duration-700">
-                <p className="text-gray-700 text-lg">
-                  Suggest beautiful places to see on an upcoming road trip
-                </p>
-                <img
-                  className="absolute w-9 p-1 bg-white rounded-2xl bottom-2 right-2"
-                  src={assets.compass_icon}
-                />
-              </div>
-              <div className="relative card h-48 p-4 rounded-lg cursor-pointe bg-gray-300 hover:bg-gray-400 hover:scale-105 transition-all duration-700">
-                <p className="text-gray-700 text-lg">
-                  Briefly summarize this concept: urban planning
-                </p>
-                <img
-                  className="absolute w-9 p-1 bg-white rounded-2xl bottom-2 right-2"
-                  src={assets.bulb_icon}
-                />
-              </div>
-              <div className="relative card h-48 p-4 rounded-lg cursor-pointe bg-gray-300 hover:bg-gray-400 hover:scale-105 transition-all duration-700">
-                <p className="text-gray-700 text-lg">
-                  Brainstorm team bonding activities for our work retreat
-                </p>
-                <img
-                  className="absolute w-9 p-1 bg-white rounded-2xl bottom-2 right-2"
-                  src={assets.message_icon}
-                />
-              </div>
-              <div className="relative card h-48 p-4 rounded-lg cursor-pointe bg-gray-300 hover:bg-gray-400 hover:scale-105 transition-all duration-700">
-                <p className="text-gray-700 text-lg">
-                  Tell me about React js and React native
-                </p>
-                <img
-                  className="absolute w-9 p-1 bg-white rounded-2xl bottom-2 right-2"
-                  src={assets.code_icon}
-                />
-              </div>
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className="relative card h-48 p-4 rounded-lg cursor-pointe bg-gray-300 hover:bg-gray-400 hover:scale-105 cursor-pointer transition-all duration-700"
+                  onClick={() => onSent(item.title)}
+                >
+                  <p className="text-gray-700 text-lg">{item.title}</p>
+                  <img
+                    className="absolute w-9 p-1 bg-white rounded-2xl bottom-2 right-2"
+                    src={item.icon}
+                  />
+                </div>
+              ))}
             </div>
           </>
         ) : (
@@ -80,9 +56,11 @@ const Main = () => {
               />
               <p>{recentPrompt}</p>
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex gap-5">
               <img
-                className={`w-10 rounded-full ${loading ? `animate-spin` : ""}`}
+                className={`w-10 h-10 rounded-full ${
+                  loading ? `animate-spin` : ""
+                }`}
                 src={assets.gemini_icon}
                 alt=""
               />
@@ -123,12 +101,14 @@ const Main = () => {
                 src={assets.mic_icon}
                 alt=""
               />
-              <img
-                onClick={() => onSent()}
-                className="w-5 md:w-6 cursor-pointer"
-                src={assets.send_icon}
-                alt=""
-              />
+              {input && (
+                <img
+                  onClick={() => onSent()}
+                  className="w-5 md:w-6 cursor-pointer"
+                  src={assets.send_icon}
+                  alt=""
+                />
+              )}
             </div>
           </div>
         </div>
